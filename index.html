@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombian Pizza</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <div class="packer">
+        <header class="header-mobile">
+            <h1 class="logo">Colombian Pizza</h1>
+            <button class="open-menu" id="open-menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </header>
+        <aside>
+            <button class="close-menu" id="close-menu">
+                <i class="bi bi-x"></i>
+            </button>
+            <header>
+                <h1 class="logo">Colombian Pizza</h1>
+            </header>
+            <nav>
+                <ul class="menu">
+                    <li>
+                        <button id="menu" class="boton-menu boton-categoria active"><i class="bi bi-caret-right-fill"></i> Menu</button>
+                    </li>
+                    <li>
+                        <button id="registration" class="boton-menu boton-categoria"><i class="bi bi-caret-right-fill"></i> Registration</button>
+                    </li>
+                    <li>
+                        <button id="login" class="boton-menu boton-categoria"><i class="bi bi-caret-right-fill"></i> Login</button>
+                    </li>
+                    <li>
+                        <a class="menu-button cart-button" href="./cart.html">
+                            <i class="bi bi-cart4"></i> Shopping Cart <span id="number" class="number">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <footer>
+                <p class="footer-text">© 2023 Colombian Pizza - Front End 2 Final Project</p>
+            </footer>
+        </aside>
+        <main>
+            <h2 class="main-title" id="main-title">Menu</h2>
+            <div id="products-container" class="products-container">
+                <div class="product">
+                    <img class="image-product" src="./images/hawaian.jpg" alt="Hawaian">
+                    <div class="details-product">
+                        <h3 class="product-title">Hawaian</h3>
+                        <p class="product-price">$20</p>
+                        <button class="product-add">Add</button>
+                    </div>
+                </div>
+            </div>
+            <div id="products-container" class="products-container">
+                <div class="product">
+                    <img class="image-product" src="./images/cheese-tomato.jpg" alt="Cheese-Tomato">
+                    <div class="details-product">
+                        <h3 class="product-title">Cheese-Tomato</h3>
+                        <p class="product-price">$18</p>
+                        <button class="product-add">Add</button>
+                    </div>
+                </div>
+            </div>
+            <div id="products-container" class="products-container">
+                <div class="product">
+                    <img class="image-product" src="./images/pepperoni.jpg" alt="Pepperoni">
+                    <div class="details-product">
+                        <h3 class="product-title">Pepperoni</h3>
+                        <p class="product-price">$22/p>
+                        <button class="product-add">Add</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/menu.js"></script>
+
+</body>
+</html>
