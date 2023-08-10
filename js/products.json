@@ -1,0 +1,89 @@
+[
+    {
+        "id": "hawaian",
+        "titulo": "Hawaian",
+        "imagen": "./images/products/hawaian.jpg",
+        "categoria": {
+            "nombre": "hawaian",
+            "id": "hawaian"
+        },
+        "precio": 20
+    },
+
+    {
+        "id": "cheese-tomato",
+        "titulo": "Cheese and Tomato",
+        "imagen": "./images/products/cheese-tomato.jpg",
+        "categoria": {
+            "nombre": "cheese-tomato",
+            "id": "cheese-tomato"
+        },
+        "precio": 18
+    },
+
+    {
+        "id": "pepperoni",
+        "titulo": "Pepperoni",
+        "imagen": "./images/products/pepperoni.jpg",
+        "categoria": {
+            "nombre": "pepperoni",
+            "id": "pepperoni"
+        },
+        "precio": 22
+    },
+
+    {
+        "id": "california",
+        "titulo": "California",
+        "imagen": "./images/products/california.jpg",
+        "categoria": {
+            "nombre": "california",
+            "id": "california"
+        },
+        "precio": 25
+    },
+
+    {
+        "id": "chicago",
+        "titulo": "Chicago",
+        "imagen": "./images/products/chicago.jpg",
+        "categoria": {
+            "nombre": "chicago",
+            "id": "chicago"
+        },
+        "precio": 27
+    },
+
+    {
+        "id": "greek",
+        "titulo": "Greek",
+        "imagen": "./images/products/greek.jpg",
+        "categoria": {
+            "nombre": "greek",
+            "id": "greek"
+        },
+        "precio": 36
+    },
+
+    {
+        "id": "neapolitan",
+        "titulo": "Neapolitan",
+        "imagen": "./images/products/neapolitan.jpg",
+        "categoria": {
+            "nombre": "neapolitan",
+            "id": "neapolitan"
+        },
+        "precio": 26
+    },
+
+    {
+        "id": "newYork",
+        "titulo": "New York",
+        "imagen": "./images/products/newYork.jpg",
+        "categoria": {
+            "nombre": "newYork",
+            "id": "newYork"
+        },
+        "precio": 32
+    }
+]
