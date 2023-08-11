@@ -1,89 +1,89 @@
 [
     {
         "id": "hawaian",
-        "titulo": "Hawaian",
-        "imagen": "./images/products/hawaian.jpg",
-        "categoria": {
-            "nombre": "hawaian",
+        "title": "Hawaian",
+        "image": "./images/products/hawaian.jpg",
+        "category": {
+            "name": "hawaian",
             "id": "hawaian"
         },
-        "precio": 20
+        "price": 20
     },
 
     {
         "id": "cheese-tomato",
-        "titulo": "Cheese and Tomato",
-        "imagen": "./images/products/cheese-tomato.jpg",
-        "categoria": {
-            "nombre": "cheese-tomato",
+        "title": "Cheese and Tomato",
+        "image": "./images/products/cheese-tomato.jpg",
+        "category": {
+            "name": "cheese-tomato",
             "id": "cheese-tomato"
         },
-        "precio": 18
+        "price": 18
     },
 
     {
         "id": "pepperoni",
-        "titulo": "Pepperoni",
-        "imagen": "./images/products/pepperoni.jpg",
-        "categoria": {
-            "nombre": "pepperoni",
+        "title": "Pepperoni",
+        "image": "./images/products/pepperoni.jpg",
+        "category": {
+            "name": "pepperoni",
             "id": "pepperoni"
         },
-        "precio": 22
+        "price": 22
     },
 
     {
         "id": "california",
-        "titulo": "California",
-        "imagen": "./images/products/california.jpg",
-        "categoria": {
-            "nombre": "california",
+        "title": "California",
+        "image": "./images/products/california.jpg",
+        "category": {
+            "name": "california",
             "id": "california"
         },
-        "precio": 25
+        "price": 25
     },
 
     {
         "id": "chicago",
-        "titulo": "Chicago",
-        "imagen": "./images/products/chicago.jpg",
-        "categoria": {
-            "nombre": "chicago",
+        "title": "Chicago",
+        "image": "./images/products/chicago.jpg",
+        "category": {
+            "name": "chicago",
             "id": "chicago"
         },
-        "precio": 27
+        "price": 27
     },
 
     {
         "id": "greek",
-        "titulo": "Greek",
-        "imagen": "./images/products/greek.jpg",
-        "categoria": {
-            "nombre": "greek",
+        "title": "Greek",
+        "image": "./images/products/greek.jpg",
+        "category": {
+            "name": "greek",
             "id": "greek"
         },
-        "precio": 36
+        "price": 36
     },
 
     {
         "id": "neapolitan",
-        "titulo": "Neapolitan",
-        "imagen": "./images/products/neapolitan.jpg",
-        "categoria": {
-            "nombre": "neapolitan",
+        "title": "Neapolitan",
+        "image": "./images/products/neapolitan.jpg",
+        "category": {
+            "name": "neapolitan",
             "id": "neapolitan"
         },
-        "precio": 26
+        "price": 26
     },
 
     {
         "id": "newYork",
-        "titulo": "New York",
-        "imagen": "./images/products/newYork.jpg",
-        "categoria": {
-            "nombre": "newYork",
+        "title": "New York",
+        "image": "./images/products/newYork.jpg",
+        "category": {
+            "name": "newYork",
             "id": "newYork"
         },
-        "precio": 32
+        "price": 32
     }
 ]

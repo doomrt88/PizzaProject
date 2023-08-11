@@ -26,22 +26,22 @@ function addProductsCart() {
             const div = document.createElement("div");
             div.classList.add("cart-product");
             div.innerHTML = `
-                <img class="cart-product-image" src="${product.imagen}" alt="${product.titulo}">
+                <img class="cart-product-image" src="${product.image}" alt="${product.title}">
                 <div class="cart-product-title">
                     <small>Title</small>
-                    <h3>${product.titulo}</h3>
+                    <h3>${product.title}</h3>
                 </div>
                 <div class="cart-product-quantity">
                     <small>Quantity</small>
-                    <p>${product.cantidad}</p>
+                    <p>${product.quantity}</p>
                 </div>
                 <div class="cart-product-price">
                     <small>Price</small>
-                    <p>$${product.precio}</p>
+                    <p>$${product.price}</p>
                 </div>
                 <div class="cart-product-subtotal">
                     <small>Subtotal</small>
-                    <p>$${product.precio * product.cantidad}</p>
+                    <p>$${product.price * product.quantity}</p>
                 </div>
                 <button class="delete-cart-product" id="${product.id}"><i class="bi bi-trash-fill"></i></button>
             `;
@@ -49,8 +49,8 @@ function addProductsCart() {
             containerProductsCart.append(div);
         })
     
-    actualizarbuttonsDelete();
-    actualizarTotal();
+    updateButtonsDelete();
+    updateTotal();
 	
     } else {
         containerEmptyCart.classList.remove("disabled");
@@ -63,24 +63,24 @@ function addProductsCart() {
 
 addProductsCart();
 
-function actualizarbuttonsDelete() {
+function updateButtonsDelete() {
     buttonsDelete = document.querySelectorAll(".delete-cart-product");
 
     buttonsDelete.forEach(boton => {
-        boton.addEventListener("click", eliminarDelCarrito);
+        boton.addEventListener("click", removeFromCart);
     });
 }
 
-function eliminarDelCarrito(e) {
+function removeFromCart(e) {
     Toastify({
-        text: "Producto eliminado",
+        text: "Product removed",
         duration: 3000,
         close: true,
         gravity: "top", // `top` or `bottom`
         position: "right", // `left`, `center` or `right`
         stopOnFocus: true, // Prevents dismissing of toast on hover
         style: {
-          background: "linear-gradient(to right, #4b33a8, #785ce9)",
+          background: "linear-gradient(to right, #d87d33, #e9bc5c)",
           borderRadius: "2rem",
           textTransform: "uppercase",
           fontSize: ".75rem"
@@ -92,8 +92,8 @@ function eliminarDelCarrito(e) {
         onClick: function(){} // Callback after click
       }).showToast();
 
-    const idBoton = e.currentTarget.id;
-    const index = productsInCart.findIndex(product => product.id === idBoton);
+    const idButton = e.currentTarget.id;
+    const index = productsInCart.findIndex(product => product.id === idButton);
     
     productsInCart.splice(index, 1);
     addProductsCart();
@@ -102,16 +102,16 @@ function eliminarDelCarrito(e) {
 
 }
 
-buttonEmpty.addEventListener("click", vaciarCarrito);
-function vaciarCarrito() {
+buttonEmpty.addEventListener("click", emptyCart);
+function emptyCart() {
 
     Swal.fire({
-        title: '¿Estás seguro?',
+        title: '¿Are you sure?',
         icon: 'question',
-        html: `Se van a borrar ${productsInCart.reduce((acc, product) => acc + product.cantidad, 0)} productos.`,
+        html: `It will remove ${productsInCart.reduce((acc, product) => acc + product.quantity, 0)} products.`,
         showCancelButton: true,
         focusConfirm: false,
-        confirmButtonText: 'Sí',
+        confirmButtonText: 'Yes',
         cancelButtonText: 'No'
     }).then((result) => {
         if (result.isConfirmed) {
@@ -123,13 +123,13 @@ function vaciarCarrito() {
 }
 
 
-function actualizarTotal() {
-    const totalCalculado = productsInCart.reduce((acc, product) => acc + (product.precio * product.cantidad), 0);
-    total.innerText = `$${totalCalculado}`;
+function updateTotal() {
+    const totalCalculated = productsInCart.reduce((acc, product) => acc + (product.price * product.quantity), 0);
+    total.innerText = `$${totalCalculated}`;
 }
 
-buttonBuy.addEventListener("click", comprarCarrito);
-function comprarCarrito() {
+buttonBuy.addEventListener("click", buyCart);
+function buyCart() {
 
     productsInCart.length = 0;
     localStorage.setItem("products-in-cart", JSON.stringify(productsInCart));
