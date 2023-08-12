@@ -7,15 +7,14 @@ fetch("./js/products.json")
         addProducts(products);
     })
 
-
 const containerProducts = document.querySelector("#package-products");
 const buttonsCategories = document.querySelectorAll(".category-button");
 const mainTitle = document.querySelector("#main-title");
 let buttonsAdd = document.querySelectorAll(".product-add");
 const smallNumber = document.querySelector("#small-number");
+const aboutContainer = document.querySelector("#history");
 
-
-buttonsCategories.forEach(boton => boton.addEventListener("click", () => {
+buttonsCategories.forEach(button => button.addEventListener("click", () => {
     aside.classList.remove("aside-visible");
 }))
 
@@ -63,6 +62,49 @@ buttonsCategories.forEach(boton => {
     })
 });
 
+$(document).ready(function () {
+    $("#main-title").show()
+    $("#package-products").show()
+    $("#history-title").hide()
+    $("#history").hide()
+    $("#locations-title").hide()
+    $("#locations").hide()
+    $("#contact-title").hide()
+    $("#contact").hide()
+});
+
+$("button#menu").click(function () {
+    $("#main-title").show()
+    $("#package-products").show()
+    $("#history-title").hide()
+    $("#history").hide()
+    $("#locations-title").hide()
+    $("#locations").hide()
+    $("#contact-title").hide()
+    $("#contact").hide()
+});
+
+$("button#about-us").click(function () {
+    $("#main-title").hide()
+    $("#package-products").hide()
+    $("#history-title").show()
+    $("#history").show()
+    $("#locations-title").show()
+    $("#locations").show()
+    $("#contact-title").show()
+    $("#contact").show()
+    
+});
+
+
+function updateButtonsAdd() {
+    buttonsAdd = document.querySelectorAll(".product-add");
+
+    buttonsAdd.forEach(boton => {
+        boton.addEventListener("click", addToCart);
+    });
+}
+
 function updateButtonsAdd() {
     buttonsAdd = document.querySelectorAll(".product-add");
 
@@ -92,22 +134,22 @@ function addToCart(e) {
         position: "right", // `left`, `center` or `right`
         stopOnFocus: true, // Prevents dismissing of toast on hover
         style: {
-          background: "linear-gradient(to right, #d87d33, #e9bc5c)",
-          borderRadius: "2rem",
-          textTransform: "uppercase",
-          fontSize: ".75rem"
+            background: "linear-gradient(to right, #d87d33, #e9bc5c)",
+            borderRadius: "2rem",
+            textTransform: "uppercase",
+            fontSize: ".75rem"
         },
         offset: {
             x: '1.5rem', // horizontal axis - can be a number or a string indicating unity. eg: '2em'
             y: '1.5rem' // vertical axis - can be a number or a string indicating unity. eg: '2em'
-          },
-        onClick: function(){} // Callback after click
-      }).showToast();
+        },
+        onClick: function () { } // Callback after click
+    }).showToast();
 
     const idButton = e.currentTarget.id;
     const productAdded = products.find(product => product.id === idButton);
 
-    if(productsInCart.some(product => product.id === idButton)) {
+    if (productsInCart.some(product => product.id === idButton)) {
         const index = productsInCart.findIndex(product => product.id === idButton);
         productsInCart[index].quantity++;
     } else {
