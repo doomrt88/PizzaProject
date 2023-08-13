@@ -1,11 +1,92 @@
-let products = [];
+const getProducts = () => [
+    {
+        "id": "hawaian",
+        "title": "Hawaian",
+        "image": "./images/products/hawaian.jpg",
+        "category": {
+            "name": "hawaian",
+            "id": "hawaian"
+        },
+        "price": 20
+    },
 
-fetch("./js/products.json")
-    .then(response => response.json())
-    .then(data => {
-        products = data;
-        addProducts(products);
-    })
+    {
+        "id": "cheese-tomato",
+        "title": "Cheese and Tomato",
+        "image": "./images/products/cheese-tomato.jpg",
+        "category": {
+            "name": "cheese-tomato",
+            "id": "cheese-tomato"
+        },
+        "price": 18
+    },
+
+    {
+        "id": "pepperoni",
+        "title": "Pepperoni",
+        "image": "./images/products/pepperoni.jpg",
+        "category": {
+            "name": "pepperoni",
+            "id": "pepperoni"
+        },
+        "price": 22
+    },
+
+    {
+        "id": "california",
+        "title": "California",
+        "image": "./images/products/california.jpg",
+        "category": {
+            "name": "california",
+            "id": "california"
+        },
+        "price": 25
+    },
+
+    {
+        "id": "chicago",
+        "title": "Chicago",
+        "image": "./images/products/chicago.jpg",
+        "category": {
+            "name": "chicago",
+            "id": "chicago"
+        },
+        "price": 27
+    },
+
+    {
+        "id": "greek",
+        "title": "Greek",
+        "image": "./images/products/greek.jpg",
+        "category": {
+            "name": "greek",
+            "id": "greek"
+        },
+        "price": 36
+    },
+
+    {
+        "id": "neapolitan",
+        "title": "Neapolitan",
+        "image": "./images/products/neapolitan.jpg",
+        "category": {
+            "name": "neapolitan",
+            "id": "neapolitan"
+        },
+        "price": 26
+    },
+
+    {
+        "id": "newYork",
+        "title": "New York",
+        "image": "./images/products/newYork.jpg",
+        "category": {
+            "name": "newYork",
+            "id": "newYork"
+        },
+        "price": 32
+    }
+]
 
 const containerProducts = document.querySelector("#package-products");
 const buttonsCategories = document.querySelectorAll(".category-button");
@@ -13,6 +94,13 @@ const mainTitle = document.querySelector("#main-title");
 let buttonsAdd = document.querySelectorAll(".product-add");
 const smallNumber = document.querySelector("#small-number");
 const aboutContainer = document.querySelector("#history");
+
+let products = getProducts();
+
+$(document).ready(() => {
+    addProducts(products);
+});
+
 
 buttonsCategories.forEach(button => button.addEventListener("click", () => {
     aside.classList.remove("aside-visible");
@@ -22,7 +110,6 @@ buttonsCategories.forEach(button => button.addEventListener("click", () => {
 function addProducts(productsChosen) {
 
     containerProducts.innerHTML = "";
-
     productsChosen.forEach(product => {
 
         const div = document.createElement("div");
@@ -42,60 +129,65 @@ function addProducts(productsChosen) {
     updateButtonsAdd();
 }
 
-
-buttonsCategories.forEach(boton => {
-    boton.addEventListener("click", (e) => {
-
-        buttonsCategories.forEach(boton => boton.classList.remove("active"));
-        e.currentTarget.classList.add("active");
-
-        if (e.currentTarget.id != "todos") {
-            const productCategory = products.find(product => product.category.id === e.currentTarget.id);
-            mainTitle.innerText = productCategory.category.name;
-            const productsBoton = products.filter(product => product.category.id === e.currentTarget.id);
-            addProducts(productsBoton);
+function toggleElements({
+    componentName,
+    type = "article",
+    className = "hide-component",
+    invertClass = false
+}) {
+    const sections = [...document.getElementsByTagName(type)];
+    sections.forEach((section) => {
+        if (section.id !== componentName) {
+            section.classList[invertClass ? "remove" : "add"](className)
         } else {
-            mainTitle.innerText = "All Pizzas";
-            addProducts(products);
+            section.classList[invertClass ? "add" : "remove"](className)
         }
-
     })
-});
-
-$(document).ready(function () {
-    $("#main-title").show()
-    $("#package-products").show()
-    $("#history-title").hide()
-    $("#history").hide()
-    $("#locations-title").hide()
-    $("#locations").hide()
-    $("#contact-title").hide()
-    $("#contact").hide()
-});
+}
 
 $("button#menu").click(function () {
-    $("#main-title").show()
-    $("#package-products").show()
-    $("#history-title").hide()
-    $("#history").hide()
-    $("#locations-title").hide()
-    $("#locations").hide()
-    $("#contact-title").hide()
-    $("#contact").hide()
+    const buttonOptions = {
+        componentName: "menu",
+        type: "button",
+        className: "active",
+        invertClass: true
+    }
+    toggleElements({ componentName: "menuComponent" });
+    toggleElements(buttonOptions);
 });
 
 $("button#about-us").click(function () {
-    $("#main-title").hide()
-    $("#package-products").hide()
-    $("#history-title").show()
-    $("#history").show()
-    $("#locations-title").show()
-    $("#locations").show()
-    $("#contact-title").show()
-    $("#contact").show()
-    
+    const buttonOptions = {
+        componentName: "about-us",
+        type: "button",
+        className: "active",
+        invertClass: true
+    }
+    toggleElements({ componentName: "aboutUsComponent" });
+    toggleElements(buttonOptions);
 });
 
+$("button#logIn").click(function () {
+    const buttonOptions = {
+        componentName: "logIn",
+        type: "button",
+        className: "active",
+        invertClass: true
+    }
+    toggleElements({ componentName: "loginComponent" });
+    toggleElements(buttonOptions);
+});
+
+$("button#signUp").click(function () {
+    const buttonOptions = {
+        componentName: "signUp",
+        type: "button",
+        className: "active",
+        invertClass: true
+    }
+    toggleElements({ componentName: "registerComponent" });
+    toggleElements(buttonOptions);
+});
 
 function updateButtonsAdd() {
     buttonsAdd = document.querySelectorAll(".product-add");
@@ -114,7 +206,6 @@ function updateButtonsAdd() {
 }
 
 let productsInCart;
-
 let productsInCartLS = localStorage.getItem("products-in-cart");
 
 if (productsInCartLS) {
@@ -158,7 +249,6 @@ function addToCart(e) {
     }
 
     updateSmallNumber();
-
     localStorage.setItem("products-in-cart", JSON.stringify(productsInCart));
 }
 
