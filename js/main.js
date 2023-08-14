@@ -112,14 +112,19 @@ function addProducts(productsChosen) {
     containerProducts.innerHTML = "";
     productsChosen.forEach(product => {
 
+        const isValidSession = getUserSession();
         const div = document.createElement("div");
+
         div.classList.add("product");
         div.innerHTML = `
             <img class="product-image" src="${product.image}" alt="${product.title}">
             <div class="product-details">
                 <h3 class="product-title">${product.title}</h3>
                 <p class="product-price">$${product.price}</p>
-                <button class="product-add" id="${product.id}">Add</button>
+                ${isValidSession
+                ? '<button class="product-add" id="${product.id}">Add</button>'
+                : ''
+            }
             </div>
         `;
 
@@ -132,7 +137,7 @@ function addProducts(productsChosen) {
 function toggleElements({
     componentName,
     type = "article",
-    className = "hide-component",
+    className = "disabled",
     invertClass = false
 }) {
     const sections = [...document.getElementsByTagName(type)];
@@ -154,6 +159,7 @@ $("button#menu").click(function () {
     }
     toggleElements({ componentName: "menuComponent" });
     toggleElements(buttonOptions);
+    addProducts(products);
 });
 
 $("button#about-us").click(function () {
@@ -174,7 +180,11 @@ $("button#logIn").click(function () {
         className: "active",
         invertClass: true
     }
-    toggleElements({ componentName: "loginComponent" });
+
+    // Valida si el usuario ya esta logueado
+    const isUserLoggedIn = getUserSession();
+
+    toggleElements({ componentName: isUserLoggedIn ? "userLoggedComponent" : "loginComponent" });
     toggleElements(buttonOptions);
 });
 
@@ -185,17 +195,13 @@ $("button#signUp").click(function () {
         className: "active",
         invertClass: true
     }
-    toggleElements({ componentName: "registerComponent" });
+
+    // Valida si el usuario ya esta logueado
+    const isUserLoggedIn = getUserSession();
+
+    toggleElements({ componentName: isUserLoggedIn ? "userLoggedComponent" : "registerComponent" });
     toggleElements(buttonOptions);
 });
-
-function updateButtonsAdd() {
-    buttonsAdd = document.querySelectorAll(".product-add");
-
-    buttonsAdd.forEach(boton => {
-        boton.addEventListener("click", addToCart);
-    });
-}
 
 function updateButtonsAdd() {
     buttonsAdd = document.querySelectorAll(".product-add");
@@ -255,4 +261,91 @@ function addToCart(e) {
 function updateSmallNumber() {
     let newSmallNumber = productsInCart.reduce((acc, product) => acc + product.quantity, 0);
     smallNumber.innerText = newSmallNumber;
+}
+
+function onLogin(e) {
+    e.preventDefault();
+    const email = $("#login-email").val();
+    const password = $("#login-password").val();
+
+    const data = localStorage.getItem("userInfo");
+    if (!data) return; // Control error
+
+    const userInfo = JSON.parse(data);
+    const dbUser = userInfo.users.find((user)=> user.email === email);
+    
+    if (dbUser.length === 0) return;
+    
+
+    if (dbUser.password === password) {
+        const newUserInfo = {...userInfo, currentUser: {
+            name: dbUser.name, email
+        }}
+        localStorage.setItem("userInfo", JSON.stringify(newUserInfo));
+        $("button#menu").click();
+    } else {
+        // TODO: Manejar error de inicio de sesion
+        console.error("INFORMACION INCORRECTA");
+    }
+}
+
+function onRegister(e) {
+    e.preventDefault();
+    const name = $("#register-name").val();
+    const email = $("#register-email").val();
+    const password = $("#register-password").val();
+    const passwordConfirmation = $("#register-password2").val();
+
+    if (password !== passwordConfirmation) {
+        $("#password-error").removeClass("disabled");
+        return;
+    } else {
+        $("#password-error").addClass("disabled");
+    }
+
+    if (email && name && password && passwordConfirmation) {
+        
+        const userStorage = localStorage.getItem("userInfo");
+        const userInfo = JSON.parse(userStorage);
+
+        const users = userInfo ? userInfo.users : [];
+        const alreadyCreated = users.find((user) => user.email === email);
+
+        if (alreadyCreated) {
+            $("#duplicated-email-error").removeClass("disabled");
+            return;
+        } else {
+            $("#duplicated-email-error").addClass("disabled");
+        }
+
+        const currentUser = { name, email, password };
+
+        const newUserInfo = {
+            users: [...users, currentUser],
+            currentUser: { name, email}
+        }
+
+        localStorage.setItem("userInfo", JSON.stringify(newUserInfo));
+        $("button#menu").click();
+    }
+}
+
+function getUserSession() {
+    const storage = localStorage.getItem("userInfo");
+    if (!storage) return false;
+
+    const userInfo = JSON.parse(storage);
+    return !!userInfo.currentUser;
+}
+
+function redirectToRegister() {
+    // Simula click nativo y adapta la funcion predefinida
+    const registerBtn = document.getElementById("signUp");
+    registerBtn.click();
+}
+
+function redirectToLogin() {
+    // Simula click nativo y adapta la funcion predefinida
+    const loginBtn = document.getElementById("logIn");
+    loginBtn.click();
 }

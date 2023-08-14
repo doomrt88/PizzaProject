@@ -61,16 +61,17 @@
           <h2 class="main-title" id="main-title">Menu</h2>
           <div id="package-products" class="package-products"></div>
         </article>
-        
-        <article id="aboutUsComponent" class="hide-component">
+
+        <article id="aboutUsComponent" class="disabled">
           <h2 class="main-title" id="history-title">Our History</h2>
           <div id="history">
             <h4 class="about-titles">A Slice of History</h4>
             <p>
-              The journey of The Spot Pizza commenced in 2023, when our visionary
-              founder, Group J, set out to bring a new dimension to Mississauga's
-              gastronomic landscape. Inspired by a deep-rooted passion for pizza
-              and a dream of establishing a local hub for food enthusiasts,
+              The journey of The Spot Pizza commenced in 2023, when our
+              visionary founder, Group J, set out to bring a new dimension to
+              Mississauga's gastronomic landscape. Inspired by a deep-rooted
+              passion for pizza and a dream of establishing a local hub for food
+              enthusiasts,
             </p>
             <br />
             <h4 class="about-titles">Uniting Community and Cuisine</h4>
@@ -88,8 +89,8 @@
               As we continue to evolve and refine our craft, we invite you to
               embark on a culinary adventure with us. Indulge in the magic of
               flavors, the comfort of tradition, and the joy of sharing a meal
-              with your loved ones. At The Spot Pizza, every bite is an ode to our
-              commitment to quality, community, and the pursuit of pizza
+              with your loved ones. At The Spot Pizza, every bite is an ode to
+              our commitment to quality, community, and the pursuit of pizza
               perfection.
             </p>
           </div>
@@ -146,13 +147,81 @@
           </div>
         </article>
 
-        <article id="loginComponent" class="hide-component">
-          Login
+        <article id="loginComponent" class="disabled">
+          <form onsubmit="onLogin(event)" class="login-modal">
+            <h2 class="login-modal__title">
+              Login
+            </h2>
+            <div class="input-container">
+              <label for="login-email" class="input-container__label">Email</label>
+              <input id="login-email" type="email" class="input-container__input"/>
+            </div>
+            <div class="input-container">
+              <label for="login-password" class="input-container__label">Password</label>
+              <input id="login-password" type="password" class="input-container__input"/>
+            </div>
+            <div class="input-container__footer">
+              <button type="submit" class="submit-button">Login</button>
+              <p class="input-container__description">
+                Don't have an account? 
+                <span 
+                  class="input-container__action"
+                  role="button"
+                  tabindex="0"
+                  onclick="redirectToRegister()"
+                >
+                  Register here
+                </span>
+              </p>
+            </div>
+          </form>
         </article>
 
-        <article id="registerComponent" class="hide-component">
-          Register
+        <article id="registerComponent" class="disabled">
+          <form onsubmit="onRegister(event)" class="login-modal">
+            <h2 class="login-modal__title">
+              Sign up
+            </h2>
+            <div class="input-container">
+              <label for="register-name" class="input-container__label">Name</label>
+              <input type="text" class="input-container__input" id="register-name" />
+            </div>
+            <div class="input-container">
+              <label for="register-email" class="input-container__label">Email</label>
+              <input id="register-email" type="email" class="input-container__input"/>
+            </div>
+            <div class="input-container">
+              <label for="register-password" class="input-container__label">Password</label>
+              <input id="register-password" type="password" class="input-container__input"/>
+            </div>
+            <div class="input-container">
+              <label for="register-password2" class="input-container__label">Confirm password</label>
+              <input id="register-password2" type="password" class="input-container__input"/>
+            </div>
+            <p id="password-error" class="disabled">The passwords must match</p>
+            <p id="duplicated-email-error" class="disabled">The email provided is already in use</p>
+            <div class="input-container__footer">
+              <button type="submit" class="submit-button">Register</button>
+              <p class="input-container__description">
+                Already have an account? 
+                <span 
+                  class="input-container__action"
+                  role="button"
+                  tabindex="0"
+                  onclick="redirectToLogin()"
+                >
+                Login here
+                </span>
+              </p>
+            </div>
+          </form>
         </article>
+
+        <article id="userLoggedComponent" class="disabled">
+          <section>
+            welcome back user
+        </article>
+
         <br />
       </main>
     </div>
