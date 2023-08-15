@@ -98,6 +98,14 @@ const aboutContainer = document.querySelector("#history");
 let products = getProducts();
 
 $(document).ready(() => {
+    const session = getUserSession();
+    if (session) {
+        $("#user-session__action").removeClass("disabled");
+        $("#log-in__action").addClass("disabled");
+        $("#sign-up__action").addClass("disabled");
+
+        $("#username").text(session.name);
+    }
     addProducts(products);
 });
 
@@ -122,7 +130,7 @@ function addProducts(productsChosen) {
                 <h3 class="product-title">${product.title}</h3>
                 <p class="product-price">$${product.price}</p>
                 ${isValidSession
-                ? '<button class="product-add" id="${product.id}">Add</button>'
+                ? `<button class="product-add" id='${product.id}'>Add</button>`
                 : ''
             }
             </div>
@@ -203,6 +211,20 @@ $("button#signUp").click(function () {
     toggleElements(buttonOptions);
 });
 
+$("button#user").click(function () {
+    const buttonOptions = {
+        componentName: "user",
+        type: "button",
+        className: "active",
+        invertClass: true
+    }
+
+    toggleElements({ componentName: "userLoggedComponent" });
+    toggleElements(buttonOptions);
+    const { name } = getUserSession();
+    $("#username-page").text(`Welcome back, ${name}`)
+});
+
 function updateButtonsAdd() {
     buttonsAdd = document.querySelectorAll(".product-add");
 
@@ -263,8 +285,19 @@ function updateSmallNumber() {
     smallNumber.innerText = newSmallNumber;
 }
 
+function setupLogin(userName) {
+    $("button#menu").click();
+    $("#user-session__action").removeClass("disabled");
+    $("#log-in__action").addClass("disabled");
+    $("#sign-up__action").addClass("disabled");
+
+    console.log($("#username").text());
+    $("#username").text(userName)
+}
+
 function onLogin(e) {
     e.preventDefault();
+    $("#login-error").addClass("disabled")
     const email = $("#login-email").val();
     const password = $("#login-password").val();
 
@@ -272,20 +305,34 @@ function onLogin(e) {
     if (!data) return; // Control error
 
     const userInfo = JSON.parse(data);
-    const dbUser = userInfo.users.find((user)=> user.email === email);
-    
+    const dbUser = userInfo.users.find((user) => user.email === email) || [];
+    console.log(dbUser);
+
     if (dbUser.length === 0) return;
-    
+
 
     if (dbUser.password === password) {
-        const newUserInfo = {...userInfo, currentUser: {
-            name: dbUser.name, email
-        }}
+        const newUserInfo = {
+            ...userInfo, currentUser: { name: dbUser.name, email }
+        }
+
         localStorage.setItem("userInfo", JSON.stringify(newUserInfo));
-        $("button#menu").click();
+        setupLogin(dbUser.name);
+        cleanForm();
     } else {
-        // TODO: Manejar error de inicio de sesion
-        console.error("INFORMACION INCORRECTA");
+        $("#login-error").removeClass("disabled")
+    }
+}
+
+function cleanForm(isRegister = false) {
+    if (isRegister) {
+        $("#register-name").val("");
+        $("#register-email").val("");
+        $("#register-password").val("");
+        $("#register-password2").val("");
+    } else {
+        $("#login-email").val("");
+        $("#login-password").val("");
     }
 }
 
@@ -304,7 +351,7 @@ function onRegister(e) {
     }
 
     if (email && name && password && passwordConfirmation) {
-        
+
         const userStorage = localStorage.getItem("userInfo");
         const userInfo = JSON.parse(userStorage);
 
@@ -322,11 +369,12 @@ function onRegister(e) {
 
         const newUserInfo = {
             users: [...users, currentUser],
-            currentUser: { name, email}
+            currentUser: { name, email }
         }
 
         localStorage.setItem("userInfo", JSON.stringify(newUserInfo));
-        $("button#menu").click();
+        setupLogin(name);
+        cleanForm(true);
     }
 }
 
@@ -335,7 +383,7 @@ function getUserSession() {
     if (!storage) return false;
 
     const userInfo = JSON.parse(storage);
-    return !!userInfo.currentUser;
+    return userInfo.currentUser;
 }
 
 function redirectToRegister() {
@@ -348,4 +396,18 @@ function redirectToLogin() {
     // Simula click nativo y adapta la funcion predefinida
     const loginBtn = document.getElementById("logIn");
     loginBtn.click();
+}
+
+function closeSession() {
+    const userInfo = localStorage.getItem("userInfo");
+    if (!userInfo) return;
+
+    console.log(userInfo);
+    const userData = JSON.parse(userInfo);
+    console.log(userData);
+    localStorage.setItem("userInfo", JSON.stringify({ users: userData.users, currentUser: null }));
+    $("button#logIn").click();
+    $("#user-session__action").addClass("disabled");
+    $("#log-in__action").removeClass("disabled");
+    $("#sign-up__action").removeClass("disabled");
 }

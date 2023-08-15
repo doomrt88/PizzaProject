@@ -34,14 +34,20 @@
                 <i class="bi bi-fan"></i> About Us
               </button>
             </li>
-            <li>
+            <li id="log-in__action">
               <button id="logIn" class="menu-button category-button">
                 <i class="bi bi-fan"></i> Log In
               </button>
             </li>
-            <li>
+            <li id="sign-up__action">
               <button id="signUp" class="menu-button category-button">
                 <i class="bi bi-fan"></i> Sign Up
+              </button>
+            </li>
+            <li id="user-session__action" class="disabled">
+              <button id="user" class="menu-button category-button">
+                <i class="bi bi-fan"></i>
+                <span id="username">User</span>
               </button>
             </li>
             <li>
@@ -59,6 +65,29 @@
       <main>
         <article id="menuComponent">
           <h2 class="main-title" id="main-title">Menu</h2>
+          <div class="filters-container">
+            <div>
+              <p>
+                Filters
+              </p>
+              <label for="size">Select Size:</label>
+              <select id="size" name="size">
+                  <option value="medium">All</option>
+                  <option value="small">Medium</option>
+                  <option value="small">Small</option>
+                  <option value="large">Large</option>
+              </select>
+              <label for="price">Price:</label>
+              <select id="price" name="size">
+                  <option value="low">Lowest to highest</option>
+                  <option value="high">Highest to lowest</option>
+              </select>
+            </div>
+            <div>
+              <button class="submit-button">Apply</button>
+            </div>
+            
+          </div>
           <div id="package-products" class="package-products"></div>
         </article>
 
@@ -160,6 +189,7 @@
               <label for="login-password" class="input-container__label">Password</label>
               <input id="login-password" type="password" class="input-container__input"/>
             </div>
+            <p id="login-error" class="disabled">Incorrect user or password</p>
             <div class="input-container__footer">
               <button type="submit" class="submit-button">Login</button>
               <p class="input-container__description">
@@ -219,7 +249,15 @@
 
         <article id="userLoggedComponent" class="disabled">
           <section>
-            welcome back user
+            <h2 class="login-modal__title" id="username-page">
+              Welcome back, User
+            </h2>
+            <a class="submit-button mr-5" id="log-out" href="./cart.html">
+              View shopping cart
+            </a>
+            <button class="submit-button" id="log-out" onclick="closeSession()">
+              Logout
+            </button>
         </article>
 
         <br />
