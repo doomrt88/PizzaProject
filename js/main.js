@@ -411,3 +411,28 @@ function closeSession() {
     $("#log-in__action").removeClass("disabled");
     $("#sign-up__action").removeClass("disabled");
 }
+
+function applyFilter(){
+    let products = getProducts();
+    const price = $("#price").val();
+    const compareValue = price.localeCompare("low")
+    if (compareValue == 0)   
+        products = sortJSON(products, 'price', 'asc');
+    else
+        products = sortJSON(products, 'price', 'desc');
+    addProducts(products);
+}
+
+function sortJSON(data, key, orden) {
+    return data.sort(function (a, b) {
+        var x = a[key],
+        y = b[key];
+
+        if (orden === 'asc') {
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        if (orden === 'desc') {
+            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+    });
+}
