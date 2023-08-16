@@ -7,7 +7,8 @@ const getProducts = () => [
             "name": "hawaian",
             "id": "hawaian"
         },
-        "price": 20
+        "price": 20,
+        "size": "Small"
     },
 
     {
@@ -18,7 +19,8 @@ const getProducts = () => [
             "name": "cheese-tomato",
             "id": "cheese-tomato"
         },
-        "price": 18
+        "price": 18,
+        "size": "Small"
     },
 
     {
@@ -29,7 +31,8 @@ const getProducts = () => [
             "name": "pepperoni",
             "id": "pepperoni"
         },
-        "price": 22
+        "price": 22,
+        "size": "Medium"
     },
 
     {
@@ -40,7 +43,8 @@ const getProducts = () => [
             "name": "california",
             "id": "california"
         },
-        "price": 25
+        "price": 25,
+        "size": "Medium"
     },
 
     {
@@ -51,7 +55,8 @@ const getProducts = () => [
             "name": "chicago",
             "id": "chicago"
         },
-        "price": 27
+        "price": 27,
+        "size": "Medium"
     },
 
     {
@@ -62,7 +67,8 @@ const getProducts = () => [
             "name": "greek",
             "id": "greek"
         },
-        "price": 36
+        "price": 36,
+        "size": "Large"
     },
 
     {
@@ -73,7 +79,8 @@ const getProducts = () => [
             "name": "neapolitan",
             "id": "neapolitan"
         },
-        "price": 26
+        "price": 26,
+        "size": "Medium"
     },
 
     {
@@ -84,7 +91,8 @@ const getProducts = () => [
             "name": "newYork",
             "id": "newYork"
         },
-        "price": 32
+        "price": 32,
+        "size": "Large"
     }
 ]
 
@@ -414,12 +422,18 @@ function closeSession() {
 
 function applyFilter(){
     let products = getProducts();
+
+    const size = $("#size").val();
+    if (size.localeCompare("All") != 0)
+        products = products.filter(a => a.size == size);
+
     const price = $("#price").val();
     const compareValue = price.localeCompare("low")
     if (compareValue == 0)   
         products = sortJSON(products, 'price', 'asc');
     else
         products = sortJSON(products, 'price', 'desc');
+    
     addProducts(products);
 }
 
